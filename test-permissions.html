@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Permission System</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #38BDF8;
+            color: white;
+        }
+        button:hover {
+            background: #0EA5E9;
+        }
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>MediTrip Permission System Test</h1>
+
+    <div class="test-section">
+        <h2>1. Create Test Accounts</h2>
+        <button onclick="createTestAccounts()">Create Test Accounts</button>
+        <div class="status" id="create-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. View All Users</h2>
+        <button onclick="viewAllUsers()">View Users</button>
+        <div class="status" id="users-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test Superadmin Login</h2>
+        <button onclick="loginAs('nattugglahk@gmail.com', 'admin123')">Login as Superadmin</button>
+        <div class="status" id="superadmin-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test User Login</h2>
+        <button onclick="loginAs('user@test.com', 'user123')">Login as User</button>
+        <div class="status" id="user-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Test Staff Login</h2>
+        <button onclick="loginAs('staff@test.com', 'staff123')">Login as Staff</button>
+        <div class="status" id="staff-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. Clear All Data</h2>
+        <button onclick="clearData()" style="background:#EF4444;">Clear LocalStorage</button>
+        <div class="status" id="clear-status"></div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'meditrip_users';
+        const CURRENT_USER_KEY = 'meditrip_current_user';
+
+        function createTestAccounts() {
+            const users = {
+                'nattugglahk@gmail.com': {
+                    email: 'nattugglahk@gmail.com',
+                    password: 'admin123',
+                    role: 'superadmin',
+                    createdAt: new Date().toISOString()
+                },
+                'user@test.com': {
+                    email: 'user@test.com',
+                    password: 'user123',
+                    role: 'user',
+                    createdAt: new Date().toISOString()
+                },
+                'staff@test.com': {
+                    email: 'staff@test.com',
+                    password: 'staff123',
+                    role: 'staff',
+                    createdAt: new Date().toISOString()
+                },
+                'admin@test.com': {
+                    email: 'admin@test.com',
+                    password: 'admin123',
+                    role: 'admin',
+                    createdAt: new Date().toISOString()
+                }
+            };
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+            document.getElementById('create-status').textContent = 'Created 4 test accounts:\n' +
+                '- nattugglahk@gmail.com (superadmin) / admin123\n' +
+                '- admin@test.com (admin) / admin123\n' +
+                '- staff@test.com (staff) / staff123\n' +
+                '- user@test.com (user) / user123';
+        }
+
+        function viewAllUsers() {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const output = Object.entries(users).map(([email, data]) => {
+                return `${email}: ${data.role} (created: ${data.createdAt})`;
+            }).join('\n');
+
+            document.getElementById('users-status').textContent =
+                output || 'No users found. Create test accounts first.';
+        }
+
+        function loginAs(email, password) {
+            localStorage.setItem(CURRENT_USER_KEY, email);
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const user = users[email];
+
+            if (user) {
+                const statusId = email === 'nattugglahk@gmail.com' ? 'superadmin-status' :
+                               (email === 'user@test.com' ? 'user-status' : 'staff-status');
+
+                document.getElementById(statusId).textContent =
+                    `Logged in as: ${email}\nRole: ${user.role}\n\nNow go to index.html to test the UI.`;
+            } else {
+                alert('User not found. Create test accounts first.');
+            }
+        }
+
+        function clearData() {
+            localStorage.clear();
+            document.getElementById('clear-status').textContent = 'All localStorage data cleared.';
+        }
+    </script>
+</body>
+</html>

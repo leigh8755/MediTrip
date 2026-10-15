@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management - MediTrip</title>
+    <link rel="stylesheet" href="styles.css?v=4">
+    <style>
+        .customer-page {
+            min-height: 100vh;
+            background: #05070C;
+            padding: 2rem 0;
+        }
+
+        .customer-header {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .customer-header h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: #38BDF8;
+            margin: 0;
+        }
+
+        .customer-header .back-btn {
+            padding: 0.75rem 1.5rem;
+            background: #1E2636;
+            color: #38BDF8;
+            border: 1px solid #38BDF8;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .customer-header .back-btn:hover {
+            background: #38BDF8;
+            color: #05070C;
+        }
+
+        .customer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .customer-tools {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .customer-tools button {
+            padding: 0.75rem 1.5rem;
+            background: #1E2636;
+            color: #38BDF8;
+            border: 1px solid #38BDF8;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .customer-tools button:hover {
+            background: #38BDF8;
+            color: #05070C;
+        }
+
+        .customer-table-wrapper {
+            background: #0F131C;
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .customer-table th,
+        .customer-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #1E2636;
+        }
+
+        .customer-table th {
+            color: #38BDF8;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .customer-table td {
+            color: #CBD5E1;
+        }
+
+        .customer-table tbody tr:hover {
+            background: #161D2B;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-buttons button {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-edit {
+            background: #38BDF8;
+            color: #05070C;
+        }
+
+        .btn-edit:hover {
+            background: #0EA5E9;
+        }
+
+        .btn-delete {
+            background: #EF4444;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #DC2626;
+        }
+
+        .btn-delete:disabled {
+            background: #64748B;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #94A3B8;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-page">
+        <div class="customer-header">
+            <h1>Customer Management</h1>
+            <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+
+        <div class="customer-container">
+            <div class="customer-tools">
+                <button id="add-customer-btn">+ Add Customer</button>
+                <button id="export-customers-btn">Export Data</button>
+            </div>
+
+            <div class="customer-table-wrapper">
+                <div id="customer-content">
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <p>Customer management system will be implemented here.</p>
+                        <p style="margin-top:0.5rem; font-size:0.875rem;">Staff and Admin can view and edit customer records.<br>Only Admin can delete records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js?v=10"></script>
+    <script>
+        // Check if user has permission to access this page
+        const STORAGE_KEY = 'meditrip_users';
+        const CURRENT_USER_KEY = 'meditrip_current_user';
+
+        function getCurrentUser() {
+            const email = localStorage.getItem(CURRENT_USER_KEY);
+            if (!email) return null;
+
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const userData = users[email];
+            if (!userData) return null;
+
+            const role = (email === 'nattugglahk@gmail.com') ? 'superadmin' : (userData.role || 'user');
+            return { email, role };
+        }
+
+        // Redirect if not authorized
+        const user = getCurrentUser();
+        if (!user || !['staff', 'admin', 'superadmin'].includes(user.role)) {
+            alert('Access denied. This page is only available to staff and administrators.');
+            window.location.href = 'index.html';
+        }
+
+        // Show role badge
+        document.querySelector('.customer-header h1').insertAdjacentHTML('afterend',
+            `<span style="color:#94A3B8;font-size:1rem;font-weight:400;margin-left:1rem;">(${user.role})</span>`
+        );
+
+        // Placeholder functionality
+        document.getElementById('add-customer-btn').addEventListener('click', () => {
+            alert('Add customer functionality will be implemented here.');
+        });
+
+        document.getElementById('export-customers-btn').addEventListener('click', () => {
+            alert('Export functionality will be implemented here.');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrip - Medical Tourism in China</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>MediTrip</h1>
+                    <p class="tagline">Your Healthcare Bridge to China</p>
+                </div>
+                <nav class="main-nav">
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#insurance" class="nav-link">Insurance</a>
+                    <a href="#about" class="nav-link">About Us</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                <div class="header-right">
+                    <div class="language-switcher">
+                        <div class="custom-select" id="lang-select">
+                            <div class="select-selected"><span class="fi fi-gb"></span> EN</div>
+                            <div class="select-items select-hide">
+                                <div data-value="en"><span class="fi fi-gb"></span> EN</div>
+                                <div data-value="zh"><span class="fi fi-cn"></span> 中文</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="login-button" id="login-btn">Sign In / Sign Up</button>
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <button class="user-menu-toggle" id="user-menu-toggle" aria-haspopup="true" aria-expanded="false">
+                            <span class="user-email" id="user-email-display"></span>
+                        </button>
+                        <div class="user-dropdown" id="user-dropdown" role="menu" hidden>
+                            <button class="user-dropdown-item" id="dashboard-btn" data-tab="notes" role="menuitem">My Notes</button>
+                            <button class="user-dropdown-item" id="customer-mgmt-btn" role="menuitem" style="display:none;">Customer Management</button>
+                            <button class="user-dropdown-item" id="account-mgmt-btn" role="menuitem" style="display:none;">Account Management</button>
+                            <button class="user-dropdown-item" id="change-password-btn" data-tab="settings" role="menuitem">Change Password</button>
+                            <button class="user-dropdown-item user-dropdown-logout" id="logout-btn" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Access World-Class Healthcare in China</h2>
+                <p class="hero-subtitle">Expert consultation • Trusted medical facilities • Seamless experience</p>
+                <button class="cta-button">Start Your Healthcare Journey</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <!-- Health Checkup -->
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3 class="service-title">Health Checkup</h3>
+                    <p class="service-desc">Curated institutions for preventive screening and personalized health assessment</p>
+                    <button class="service-button" data-service="checkup">Learn More</button>
+                </div>
+
+                <!-- TCM -->
+                <div class="service-card">
+                    <div class="service-icon">🌿</div>
+                    <h3 class="service-title">Traditional Chinese Medicine</h3>
+                    <p class="service-desc">Bilingual institution guide for TCM care, rehabilitation and wellness</p>
+                    <button class="service-button" data-service="tcm">Learn More</button>
+                </div>
+
+                <!-- Dental -->
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3 class="service-title">Dental Services</h3>
+                    <p class="service-desc">Dental hospitals and centres for examinations, restoration, implants and orthodontics</p>
+                    <button class="service-button" data-service="dental">Learn More</button>
+                </div>
+
+                <!-- Optometry -->
+                <div class="service-card">
+                    <div class="service-icon">👓</div>
+                    <h3 class="service-title">Vision Care</h3>
+                    <p class="service-desc">Ophthalmology institutions covering specialist assessment and eye care</p>
+                    <button class="service-button" data-service="optom">Learn More</button>
+                </div>
+
+                <!-- Aesthetics -->
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3 class="service-title">Medical Aesthetics</h3>
+                    <p class="service-desc">Public and private institutions for aesthetic medicine and reconstructive care</p>
+                    <button class="service-button" data-service="aesthetics">Learn More</button>
+                </div>
+
+                <!-- Boao Lecheng -->
+                <div class="service-card">
+                    <div class="service-icon">💊</div>
+                    <h3 class="service-title">Advanced Treatment (Boao Lecheng)</h3>
+                    <p class="service-desc">A regulated pilot zone for specialist care and selected innovative medicines and devices</p>
+                    <button class="service-button" data-service="boao">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>Share your medical needs with our team</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>We create a personalized healthcare plan</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Coordination</h3>
+                    <p>We arrange appointments and logistics</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Support</h3>
+                    <p>On-site assistance throughout your journey</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance & Payment Section -->
+    <section id="insurance" class="insurance">
+        <div class="container">
+            <h2 class="section-title">Insurance & Payment</h2>
+            <div class="insurance-content">
+                <div class="insurance-card">
+                    <h3>International Insurance</h3>
+                    <p>Direct billing for eligible insurance plans</p>
+                </div>
+                <div class="insurance-card">
+                    <h3>Payment Options</h3>
+                    <p>Multiple currencies and payment methods accepted</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <p>MediTrip connects international patients with trusted healthcare providers in China.</p>
+                <p class="disclaimer">Medical disclaimer: This platform provides healthcare consultation and coordination services. We do not provide medical diagnosis or prescription services. Consult licensed medical professionals for medical advice.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-methods">
+                <div class="contact-method-card">
+                    <div class="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>E-Mail</h3>
+                    <a href="mailto:info@meditrip.com" class="contact-link">info@meditrip.com</a>
+                    <p class="contact-description">Send us an email anytime</p>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2.066 2A19.932 19.932 0 0 1 3 5.066 2 2 0 0 1 5 3h4a2 2 0 0 1 2 1.77 13 13 0 0 0 .7 2.7 2 2 0 0 1-.45 2.11L9.4 11.5a16 16 0 0 0 3.1 3.1l1.9-1.85a2 2 0 0 1 2.11-.45 13 13 0 0 0 2.7.7A2 2 0 0 1 21 15z"/>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <a href="https://wa.me/1234567890" target="_blank" class="contact-link">+1 (234) 567-890</a>
+                    <p class="contact-description">Chat with us on WhatsApp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Consultation Form Modal -->
+    <div id="consultation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Start Your Healthcare Journey</h2>
+            <form id="consultation-form" class="modal-form">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone">
+                </div>
+                <div class="form-group">
+                    <label>Service of Interest *</label>
+                    <select name="service" required>
+                        <option value="">Select a service</option>
+                        <option value="checkup">Health Checkup</option>
+                        <option value="tcm">Traditional Chinese Medicine</option>
+                        <option value="dental">Dental Services</option>
+                        <option value="optom">Vision Care</option>
+                        <option value="aesthetics">Medical Aesthetics</option>
+                        <option value="boao">Advanced Treatment</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="4" placeholder="Tell us about your healthcare needs..."></textarea>
+                </div>
+                <!-- Honeypot: hidden from people, bots fill it in and FormSubmit drops the submission -->
+                <input type="text" name="_honey" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-error" id="consultation-error" role="alert"></div>
+                <button type="submit" class="modal-button">Submit Consultation Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+
+            <!-- Login Form -->
+            <div id="login-form-container">
+                <h2>Login to Your Account</h2>
+                <form id="login-form" class="modal-form">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="form-error" id="login-error"></div>
+                    <button type="submit" class="modal-button">Login</button>
+                    <p class="form-switch">Don't have an account? <a href="#" id="show-register">Register</a></p>
+                    <p class="form-switch"><a href="#" id="show-forgot-password">Forgot Password?</a></p>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form-container" style="display: none;">
+                <h2>Create an Account</h2>
+                <form id="register-form" class="modal-form">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="register-password" required>
+                        <small>Minimum 8 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <input type="password" id="register-password-confirm" required>
+                    </div>
+                    <div class="form-error" id="register-error"></div>
+                    <button type="submit" class="modal-button">Register</button>
+                    <p class="form-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+                </form>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div id="forgot-password-container" style="display: none;">
+                <h2>Reset Password</h2>
+                <form id="forgot-password-form" class="modal-form">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="forgot-email" required>
+                    </div>
+                    <div class="form-error" id="forgot-error"></div>
+                    <div class="form-success" id="forgot-success"></div>
+                    <button type="submit" class="modal-button">Send Reset Link</button>
+                    <p class="form-switch"><a href="#" id="back-to-login">Back to Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Management Modal (Superadmin only) -->
+    <div id="account-mgmt-modal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="Account Management">Account Management</h2>
+
+            <div class="account-mgmt-container">
+                <div class="account-mgmt-header">
+                    <div class="search-box">
+                        <input type="text"
+                               id="account-search"
+                               placeholder="Search by email..."
+                               data-i18n-placeholder="Search by email">
+                    </div>
+                    <div class="account-stats">
+                        <span id="account-count">0 accounts</span>
+                    </div>
+                </div>
+
+                <div class="account-table-wrapper">
+                    <table class="account-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="Email">Email</th>
+                                <th data-i18n="Role">Role</th>
+                                <th data-i18n="Created At">Created At</th>
+                                <th data-i18n="Actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="account-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="account-mgmt-footer">
+                    <p class="help-text" data-i18n="account-mgmt-help">
+                        Select a role from the dropdown to change user permissions.
+                        Superadmin account is protected and cannot be modified.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div id="dashboard-modal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal">&times;</span>
+            <h2>My Dashboard</h2>
+
+            <div class="dashboard-tabs">
+                <button class="tab-button active" data-tab="notes">Notes & Schedule</button>
+                <button class="tab-button" data-tab="settings">Account Settings</button>
+            </div>
+
+            <!-- Notes Tab -->
+            <div id="notes-tab" class="tab-content active">
+                <h3>My Notes & Schedule</h3>
+                <form id="note-form" class="note-form">
+                    <input type="text" id="note-title" placeholder="Title" required>
+                    <textarea id="note-content" placeholder="Add your note or schedule..." rows="3" required></textarea>
+                    <button type="submit" class="modal-button">Add Note</button>
+                </form>
+                <div id="notes-list" class="notes-list"></div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="tab-content" style="display: none;">
+                <h3>Account Settings</h3>
+
+                <!-- Change Password -->
+                <div class="settings-section">
+                    <h4>Change Password</h4>
+                    <form id="change-password-form" class="modal-form">
+                        <div class="form-group">
+                            <label>Current Password *</label>
+                            <input type="password" id="current-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>New Password *</label>
+                            <input type="password" id="new-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password *</label>
+                            <input type="password" id="new-password-confirm" required>
+                        </div>
+                        <div class="form-error" id="password-error"></div>
+                        <div class="form-success" id="password-success"></div>
+                        <button type="submit" class="modal-button">Update Password</button>
+                    </form>
+                </div>
+
+                <!-- Delete Account -->
+                <div class="settings-section danger-zone">
+                    <h4>Danger Zone</h4>
+                    <p>Once you delete your account, there is no going back. Please be certain.</p>
+                    <button id="delete-account-btn" class="modal-button danger-button">Delete My Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-confirm-modal" class="modal">
+        <div class="modal-content modal-small">
+            <h2>Delete Account</h2>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="confirm-delete-btn" class="modal-button danger-button">Yes, Delete My Account</button>
+                <button id="cancel-delete-btn" class="modal-button secondary-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MediTrip</h4>
+                    <p>Your trusted healthcare bridge to China</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#services">Services</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#about">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#disclaimer">Medical Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MediTrip. Healthcare consultation platform.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="service-data.js?v=3"></script>
+    <script src="i18n.js?v=11"></script>
+    <script src="script.js?v=11"></script>
+</body>
+</html>
